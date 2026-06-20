@@ -1,197 +1,653 @@
 <!DOCTYPE html>
-<html lang="ur">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>As-Sa'adah Institute</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abida Shabi — Web Designer & Educator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0A0F1E;
+      --navy-2:  #111827;
+      --navy-3:  #1E2A3B;
+      --gold:    #C9A84C;
+      --gold-lt: #E2C97E;
+      --teal:    #2DD4BF;
+      --cream:   #F8F6F0;
+      --muted:   #94A3B8;
+      --card-bg: #151E2E;
+      --border:  rgba(201,168,76,0.18);
+      --radius:  14px;
+      --transition: 0.3s ease;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy);
+      color: var(--cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 5%;
+      background: rgba(10,15,30,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--cream); }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.875rem;
+      font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+      transition: color var(--transition);
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--cream); border-radius: 2px; transition: var(--transition); }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 6% 4rem;
+      background: var(--navy);
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      font-weight: 900; line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .hero-name em { color: var(--gold); font-style: normal; }
+
+    .hero-titles {
+      display: flex; flex-wrap: wrap; gap: 0.6rem;
+      margin: 1.25rem 0 2rem;
+    }
+    .title-tag {
+      padding: 0.35rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--gold-lt);
+      background: rgba(201,168,76,0.07);
+      letter-spacing: 0.03em;
+    }
+
+    .hero-bio {
+      font-size: 1rem; color: var(--muted); max-width: 440px;
+      line-height: 1.75; margin-bottom: 2.5rem;
+    }
+
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem; border-radius: 8px;
+      font-size: 0.9rem; font-weight: 600; text-decoration: none;
+      cursor: pointer; border: none; transition: all var(--transition);
+    }
+    .btn-primary {
+      background: var(--gold); color: var(--navy);
+    }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
+    .btn-outline {
+      background: transparent; color: var(--cream);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+      background: var(--navy-3);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .hero-right::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(45,212,191,0.08) 0%, transparent 60%),
+        radial-gradient(circle at 70% 70%, rgba(201,168,76,0.08) 0%, transparent 60%);
+    }
+
+    .geo-wrap {
+      position: relative; width: 340px; height: 340px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .geo-ring {
+      position: absolute; border-radius: 50%;
+      border: 1px solid var(--border);
+      animation: slowSpin linear infinite;
+    }
+    .geo-ring:nth-child(1) { width: 320px; height: 320px; border-color: rgba(201,168,76,0.2); animation-duration: 30s; }
+    .geo-ring:nth-child(2) { width: 240px; height: 240px; border-color: rgba(45,212,191,0.15); animation-duration: 20s; animation-direction: reverse; }
+    .geo-ring:nth-child(3) { width: 160px; height: 160px; border-color: rgba(201,168,76,0.12); animation-duration: 14s; }
+
+    .geo-ring::before {
+      content: '';
+      position: absolute; top: -4px; left: 50%; transform: translateX(-50%);
+      width: 7px; height: 7px; border-radius: 50%; background: var(--gold);
+    }
+
+    .geo-center {
+      position: relative; z-index: 2;
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--teal));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 900; color: var(--navy);
+      box-shadow: 0 0 40px rgba(201,168,76,0.3);
+    }
+
+    .geo-dot {
+      position: absolute; border-radius: 50%;
+      background: var(--teal); opacity: 0.4;
+      animation: floatDot ease-in-out infinite;
+    }
+    .geo-dot:nth-child(4) { width:6px;height:6px; top:15%; left:20%; animation-duration:4s; }
+    .geo-dot:nth-child(5) { width:4px;height:4px; bottom:20%; right:18%; animation-duration:5.5s; animation-delay:1s; }
+    .geo-dot:nth-child(6) { width:8px;height:8px; top:55%; left:10%; animation-duration:3.5s; animation-delay:0.5s; background: var(--gold); }
+
+    @keyframes slowSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes floatDot {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    section { padding: 6rem 5%; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--teal);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700;
+      line-height: 1.15; color: var(--cream);
+      margin-bottom: 1rem;
+    }
+    .section-title span { color: var(--gold); }
+    .section-divider {
+      width: 48px; height: 3px;
+      background: linear-gradient(to right, var(--gold), var(--teal));
+      border-radius: 2px; margin-bottom: 3rem;
+    }
+
+    #about { background: var(--navy-2); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1.25rem; }
+    .about-text p strong { color: var(--cream); }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+    }
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem; font-weight: 900; color: var(--gold);
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.25rem; letter-spacing: 0.05em; }
+
+    #skills { background: var(--navy); }
+    .skills-container { max-width: 1100px; margin: 0 auto; }
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .skill-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem 1.75rem;
+      transition: transform var(--transition), border-color var(--transition);
+    }
+    .skill-card:hover { transform: translateY(-4px); border-color: var(--gold); }
+    .skill-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
+    .skill-name { font-weight: 600; color: var(--cream); margin-bottom: 0.4rem; font-size: 0.95rem; }
+    .skill-level-bar {
+      height: 4px; background: var(--navy-3);
+      border-radius: 2px; overflow: hidden; margin-top: 0.6rem;
+    }
+    .skill-level-fill {
+      height: 100%;
+      background: linear-gradient(to right, var(--gold), var(--teal));
+      border-radius: 2px;
+    }
+    .skill-pct { font-size: 0.75rem; color: var(--teal); font-weight: 600; margin-top: 0.4rem; }
+
+    #projects { background: var(--navy-2); }
+    .projects-container { max-width: 1100px; margin: 0 auto; }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .project-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .project-thumb {
+      height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+      position: relative; overflow: hidden;
+    }
+    .project-thumb::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, var(--card-bg));
+    }
+    .thumb-1 { background: linear-gradient(135deg, #0A2444, #1a3a6e); }
+    .thumb-2 { background: linear-gradient(135deg, #1a0a2e, #3b1a6e); }
+    .thumb-3 { background: linear-gradient(135deg, #0a2210, #1a6e3b); }
+
+    .project-body { padding: 1.5rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+    .project-tag {
+      padding: 0.2rem 0.65rem; border-radius: 50px;
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.04em;
+      background: rgba(45,212,191,0.1); color: var(--teal);
+      border: 1px solid rgba(45,212,191,0.2);
+    }
+    .project-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--cream);
+      margin-bottom: 0.5rem;
+    }
+    .project-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.25rem; }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-size: 0.82rem; font-weight: 600; color: var(--gold);
+      text-decoration: none; letter-spacing: 0.04em;
+      transition: gap var(--transition);
+    }
+    .project-link:hover { gap: 0.7rem; }
+
+    #contact { background: var(--navy); }
+    .contact-container {
+      max-width: 800px; margin: 0 auto;
+    }
+    .contact-intro { color: var(--muted); max-width: 520px; margin-bottom: 2.5rem; line-height: 1.75; }
+
+    .contact-form {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) + 4px);
+      padding: 2.5rem;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; margin-bottom: 1.25rem; }
+    .form-group label {
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--navy-3);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      color: var(--cream); font-family: 'Inter', sans-serif; font-size: 0.9rem;
+      outline: none; transition: border-color var(--transition), box-shadow var(--transition);
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(148,163,184,0.5); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-group select option { background: var(--navy-2); }
+
+    .form-submit {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--gold), #B8902A);
+      color: var(--navy); font-family: 'Inter', sans-serif;
+      font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em;
+      border: none; border-radius: 8px; cursor: pointer;
+      transition: all var(--transition);
+    }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(201,168,76,0.35); }
+
+    footer {
+      background: var(--navy-2);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem 5%;
+    }
+    .footer-inner {
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; color: var(--gold);
+    }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.82rem;
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.78rem; color: rgba(148,163,184,0.5); }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-left { padding: 7rem 5% 3rem; }
+      .hero-right { height: 320px; }
+      .geo-wrap { width: 240px; height: 240px; }
+      .geo-ring:nth-child(1) { width: 220px; height: 220px; }
+      .geo-ring:nth-child(2) { width: 160px; height: 160px; }
+      .geo-ring:nth-child(3) { width: 100px; height: 100px; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: var(--navy-2); padding: 1.5rem 5%; gap: 1.25rem; border-bottom: 1px solid var(--border); }
+      .nav-links.open { display: flex; }
+      .nav-toggle { display: flex; }
+      section { padding: 4rem 5%; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
-<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #1c2541;">
+<body>
 
-    <!-- Top Notice Banner -->
-    <div style="background-color: #1c2541; color: #ffffff; text-align: center; padding: 10px 15px; font-size: 13px; font-weight: bold; letter-spacing: 0.5px;">
-        🌟 Premium Cohort Alert | Batch Starts: <span style="color: #48cae4;">15th June 2026</span>
+<nav>
+  <a href="#" class="nav-logo">Abida<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section id="home" class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">✦ Available for Collaboration</p>
+    <h1 class="hero-name">Abida<br><em>Shabi</em></h1>
+    <div class="hero-titles">
+      <span class="title-tag">Web Designer</span>
+      <span class="title-tag">Educator</span>
+      <span class="title-tag">Quran Teacher</span>
     </div>
+    <p class="hero-bio">
+      Crafting clean, purposeful digital experiences — and empowering learners through technology and Islamic education. Based online, working worldwide.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">View My Work →</a>
+      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+    </div>
+  </div>
 
-    <!-- Main Title & Program Section -->
-    <main style="text-align: center; padding: 40px 20px 20px 20px;">
-        <h1 style="font-size: 36px; font-weight: 900; margin: 0; letter-spacing: 1px; color: #1c2541; text-transform: uppercase;">AS-SA'ADAH INSTITUTE</h1>
-        <h2 style="font-family: 'Noto Nastaliq Urdu', serif; margin: 10px 0 0 0; font-size: 26px; color: #00b4d8;">السعادہ انسٹیٹیوٹ</h2>
-        <p style="font-size: 16px; font-weight: bold; letter-spacing: 2px; color: #00b4d8; margin: 15px 0 0 0; text-transform: uppercase;">Igniting Minds, Empowering Futures</p>
-        
-        <!-- Divider Line -->
-        <div style="display: flex; align-items: center; justify-content: center; margin: 25px 0;">
-            <div style="width: 80px; height: 1px; background: linear-gradient(to right, transparent, #00b4d8);"></div>
-            <span style="color: #00b4d8; margin: 0 10px; font-size: 14px;">✦</span>
-            <div style="width: 80px; height: 1px; background: linear-gradient(to left, transparent, #00b4d8);"></div>
+  <div class="hero-right">
+    <div class="geo-wrap">
+      <div class="geo-ring"></div>
+      <div class="geo-ring"></div>
+      <div class="geo-ring"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-dot"></div>
+      <div class="geo-center">AS</div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <p class="section-label">About Me</p>
+      <h2 class="section-title">Designer, Teacher,<br><span>Lifelong Learner</span></h2>
+      <div class="section-divider"></div>
+      <p>I'm <strong>Abida Shabi</strong>, founder of <strong>Fasiha Online Academy</strong> — where I run the <strong>Fahm-e-Quran</strong> program, teaching Quranic Arabic to women through a structured, word-by-word approach.</p>
+      <p>Alongside my educational work, I build web experiences that are clean, accessible, and meaningful. I believe good design serves people — and I bring that same principle to every lesson I teach.</p>
+      <p>Currently sharpening my frontend development skills, building tools that bridge technology with Islamic learning.</p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-number">3+</div>
+        <div class="stat-label">Years Teaching</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Students Taught</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">5+</div>
+        <div class="stat-label">Projects Built</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Passion for Learning</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="skills-container">
+    <p class="section-label">My Skills</p>
+    <h2 class="section-title">What I <span>Bring</span></h2>
+    <div class="section-divider"></div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">🎨</div>
+        <div class="skill-name">HTML & CSS</div>
+        <div class="skill-level-bar"><div class="skill-level-fill" style="width:90%"></div></div>
+        <div class="skill-pct">90%</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">⚡</div>
+        <div class="skill-name">JavaScript</div>
+        <div class="skill-level-bar"><div class="skill-level-fill" style="width:70%"></div></div>
+        <div class="skill-pct">70%</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📱</div>
+        <div class="skill-name">Responsive Design</div>
+        <div class="skill-level-bar"><div class="skill-level-fill" style="width:85%"></div></div>
+        <div class="skill-pct">85%</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🖥️</div>
+        <div class="skill-name">UI / UX Design</div>
+        <div class="skill-level-bar"><div class="skill-level-fill" style="width:75%"></div></div>
+        <div class="skill-pct">75%</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🐙</div>
+        <div class="skill-name">Git & GitHub</div>
+        <div class="skill-level-bar"><div class="skill-level-fill" style="width:65%"></div></div>
+        <div class="skill-pct">65%</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">📖</div>
+        <div class="skill-name">Quranic Arabic</div>
+        <div class="skill-level-bar"><div class="skill-level-fill" style="width:95%"></div></div>
+        <div class="skill-pct">95%</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🎓</div>
+        <div class="skill-name">Curriculum Design</div>
+        <div class="skill-level-bar"><div class="skill-level-fill" style="width:88%"></div></div>
+        <div class="skill-pct">88%</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <div class="skill-name">Prompt Engineering</div>
+        <div class="skill-level-bar"><div class="skill-level-fill" style="width:80%"></div></div>
+        <div class="skill-pct">80%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="projects-container">
+    <p class="section-label">My Work</p>
+    <h2 class="section-title">Featured <span>Projects</span></h2>
+    <div class="section-divider"></div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-thumb thumb-1">🕌</div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">Quran API</span>
+          </div>
+          <h3 class="project-name">Al-Qalam Platform</h3>
+          <p class="project-desc">A full Islamic learning platform featuring Quran translation, tafseer, task tracking, Tasbeehat counters, and daily duas — built for Fasiha Online Academy students.</p>
+          <a href="#" class="project-link">View Project ↗</a>
         </div>
-    </main>
+      </div>
 
-    <!-- Quote Card Section -->
-    <section style="margin: 0 20px; max-width: 500px; margin-left: auto; margin-right: auto;">
-        <div style="background-color: #1c2541; color: #ffffff; padding: 30px 25px; border-radius: 24px; text-align: center; box-shadow: 0 8px 20px rgba(28,37,65,0.15);">
-            <p style="font-size: 17px; font-style: italic; line-height: 1.7; margin: 0 0 20px 0; color: #f4f7f6; font-weight: 500;">
-                "True education is the bridge that turns digital potential into powerful reality, lighting up paths of infinite success."
-            </p>
-            <p style="color: #48cae4; font-weight: bold; margin: 0; font-size: 16px; letter-spacing: 0.5px;">— Abida Shabi</p>
+      <div class="project-card">
+        <div class="project-thumb thumb-2">📚</div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">Gamification</span>
+          </div>
+          <h3 class="project-name">Quran Flashcard Suite</h3>
+          <p class="project-desc">Interactive word-by-word flashcard tools covering Surah Al-Fatiha and Al-Baqarah, with a gamified student roadmap featuring XP points and badges.</p>
+          <a href="#" class="project-link">View Project ↗</a>
         </div>
-    </section>
+      </div>
 
-    <!-- Hero Announcement Box -->
-    <section style="text-align: center; padding: 40px 20px 20px 20px; max-width: 500px; margin: 0 auto;">
-        <div style="display: inline-block; width: 40px; height: 3px; background-color: #00b4d8; margin-bottom: 15px;"></div>
-        <p style="text-transform: uppercase; font-weight: bold; font-size: 13px; letter-spacing: 1.5px; color: #00b4d8; margin: 0 0 10px 0;">Premium Masterclass Series</p>
-        <h2 style="font-size: 38px; font-weight: 900; margin: 0; line-height: 1.2; color: #1c2541; text-transform: uppercase;">Transform Your <br><span style="color: transparent; -webkit-text-stroke: 1.5px #00b4d8;">Potential into Expertise</span></h2>
-        <p style="font-size: 17px; color: #555555; margin: 15px 0 0 0; font-weight: 500;">2-Month Accelerated Journey • Admissions Open</p>
-    </section>
-
-    <!-- Pricing Section with Badge -->
-    <section style="text-align: center; padding: 20px; max-width: 500px; margin: 0 auto; position: relative;">
-        <!-- Discount Badge -->
-        <div style="background-color: #00b4d8; color: white; width: 85px; height: 85px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; margin: 0 auto 15px auto; box-shadow: 0 6px 12px rgba(0,180,216,0.3);">
-            <span style="font-size: 22px; font-weight: 900; line-height: 1;">20%</span>
-            <span style="font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">REDUCTION</span>
+      <div class="project-card">
+        <div class="project-thumb thumb-3">🧠</div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">HTML</span>
+            <span class="project-tag">CSS</span>
+            <span class="project-tag">JS Quiz</span>
+          </div>
+          <h3 class="project-name">Islamic Quiz Game</h3>
+          <p class="project-desc">An engaging Islamic knowledge quiz application with multiple categories, score tracking, and instant feedback — deployed for student practice.</p>
+          <a href="#" class="project-link">View Project ↗</a>
         </div>
-        
-        <p style="font-size: 20px; color: #888888; text-decoration: line-through; margin: 0 0 5px 0; font-weight: bold;">PKR 5,000</p>
-        <p style="font-size: 44px; font-weight: 900; margin: 0; color: #1c2541; letter-spacing: -1px;">PKR 4,000</p>
-        
-        <div style="display: inline-block; background-color: #e0f2fe; color: #0369a1; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; margin-top: 10px; border: 1px solid #bae6fd;">
-            ✦ Exclusive Learner Savings
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-container">
+    <p class="section-label">Let's Connect</p>
+    <h2 class="section-title">Get In <span>Touch</span></h2>
+    <div class="section-divider"></div>
+    <p class="contact-intro">Whether you have a project in mind, want to collaborate on Islamic educational content, or simply want to say salam — my inbox is open.</p>
+
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" placeholder="Your first name" />
         </div>
-    </section>
-
-    <!-- Referral Code Box -->
-    <section style="margin: 20px; max-width: 500px; margin-left: auto; margin-right: auto;">
-        <div style="border: 2px solid #90e0ef; background-color: #f0faff; border-radius: 20px; padding: 20px; text-align: center;">
-            <p style="margin: 0 0 12px 0; font-size: 15px; font-weight: bold; color: #1c2541;">Unlock your premium discount using this verified referral code:</p>
-            <div style="border: 2px dashed #00b4d8; border-radius: 12px; padding: 12px; font-size: 32px; font-weight: 900; color: #00b4d8; background-color: #ffffff; letter-spacing: 4px; display: inline-block; min-width: 150px;">
-                030
-            </div>
+        <div class="form-group">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" placeholder="Your last name" />
         </div>
-    </section>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="you@example.com" />
+      </div>
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <select id="subject">
+          <option value="">Select a topic…</option>
+          <option>Web Design Project</option>
+          <option>Educational Collaboration</option>
+          <option>Fahm-e-Quran Program</option>
+          <option>General Inquiry</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" placeholder="Tell me about your project or inquiry…"></textarea>
+      </div>
+      <button class="form-submit" type="button">Send Message →</button>
+    </div>
+  </div>
+</section>
 
-    <!-- Course Quick Highlights -->
-    <section style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; padding: 10px 20px; max-width: 500px; margin: 0 auto;">
-        <div style="background-color: #e2e8f0; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; color: #1c2541;">📅 2 Months Timeline</div>
-        <div style="background-color: #e2e8f0; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; color: #1c2541;">🚀 Classes Start: June 15, 2026</div>
-        <div style="background-color: #e2e8f0; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; color: #1c2541;">🎯 4 Dynamic Pathways</div>
-        <div style="background-color: #e2e8f0; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: bold; color: #1c2541;">🏆 Certification Awarded</div>
-    </section>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Abida Shabi</div>
+    <nav class="footer-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <p class="footer-copy">© 2025 Abida Shabi · Fasiha Online Academy · Built with ❤️ & pure HTML/CSS</p>
+  </div>
+</footer>
 
-    <!-- Empowered Badge Section -->
-    <section style="padding: 20px; max-width: 500px; margin: 20px auto 0 auto; text-align: center;">
-        <h4 style="color: #1c2541; margin: 0; font-size: 22px; font-weight: bold;">✨ Empowered to Inspire ✨</h4>
-        <p style="font-family: 'Noto Nastaliq Urdu', serif; margin: 8px 0 0 0; font-size: 18px; color: #00b4d8; font-weight: bold; line-height: 1.8;">خود مختار بنیں اور دوسروں کی رہنمائی کریں</p>
-    </section>
-
-    <!-- What You'll Learn Section (Skill Tracks) -->
-    <section style="padding: 30px 20px; max-width: 500px; margin: 0 auto;">
-        <h3 style="font-size: 28px; font-weight: 800; color: #1c2541; margin: 0 0 20px 0;">Skills You Will Master</h3>
-        
-        <!-- Track 1 -->
-        <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 25px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
-            <span style="font-size: 32px; display: block; margin-bottom: 10px;">💻</span>
-            <h4 style="font-size: 18px; font-weight: bold; margin: 0 0 8px 0; color: #1c2541;">Tech Mastery</h4>
-            <p style="font-size: 14px; color: #555555; margin: 0; line-height: 1.5;">Build solid foundation in digital intelligence, key modern software, and development tools.</p>
-        </div>
-
-        <!-- Track 2 -->
-        <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 25px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
-            <span style="font-size: 32px; display: block; margin-bottom: 10px;">🎨</span>
-            <h4 style="font-size: 18px; font-weight: bold; margin: 0 0 8px 0; color: #1c2541;">Visual & Brand Design</h4>
-            <p style="font-size: 14px; color: #555555; margin: 0; line-height: 1.5;">Create highly engaging visual assets, professional design layouts, and identity concepts.</p>
-        </div>
-
-        <!-- Track 3 -->
-        <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 25px; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
-            <span style="font-size: 32px; display: block; margin-bottom: 10px;">📢</span>
-            <h4 style="font-size: 18px; font-weight: bold; margin: 0 0 8px 0; color: #1c2541;">Digital Marketing & Strategy</h4>
-            <p style="font-size: 14px; color: #555555; margin: 0; line-height: 1.5;">Harness online presence, target strategies, and growth loops for scaling visual brands.</p>
-        </div>
-
-        <!-- Track 4 -->
-        <div style="background-color: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 25px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
-            <span style="font-size: 32px; display: block; margin-bottom: 10px;">🗣️</span>
-            <h4 style="font-size: 18px; font-weight: bold; margin: 0 0 8px 0; color: #1c2541;">Professional Communication</h4>
-            <p style="font-size: 14px; color: #555555; margin: 0; line-height: 1.5;">Supercharge your expressive power, writing standards, and impactful fluency.</p>
-        </div>
-    </section>
-
-    <!-- What's Included Card -->
-    <section style="margin: 20px; max-width: 500px; margin-left: auto; margin-right: auto;">
-        <div style="background-color: #1c2541; color: #ffffff; padding: 30px 25px; border-radius: 24px; box-shadow: 0 8px 20px rgba(28,37,65,0.15);">
-            <h3 style="font-size: 24px; font-weight: bold; margin: 0 0 25px 0;">✦ What Ecosystem Offers</h3>
-            
-            <div style="display: flex; margin-bottom: 20px; align-items: flex-start;">
-                <span style="background-color: #00b4d8; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-right: 12px; margin-top: 2px; flex-shrink: 0;">✓</span>
-                <div>
-                    <h4 style="margin: 0 0 4px 0; font-size: 16px; font-weight: bold;">Interactive Virtual Labs</h4>
-                    <p style="margin: 0; font-size: 13px; color: #cbd5e1;">Engage instantly with real-world strategists</p>
-                </div>
-            </div>
-
-            <div style="display: flex; margin-bottom: 20px; align-items: flex-start;">
-                <span style="background-color: #00b4d8; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-right: 12px; margin-top: 2px; flex-shrink: 0;">✓</span>
-                <div>
-                    <h4 style="margin: 0 0 4px 0; font-size: 16px; font-weight: bold;">Hands-on Industry Work</h4>
-                    <p style="margin: 0; font-size: 13px; color: #cbd5e1;">Build a stellar practical project catalog</p>
-                </div>
-            </div>
-
-            <div style="display: flex; margin-bottom: 20px; align-items: flex-start;">
-                <span style="background-color: #00b4d8; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-right: 12px; margin-top: 2px; flex-shrink: 0;">✓</span>
-                <div>
-                    <h4 style="margin: 0 0 4px 0; font-size: 16px; font-weight: bold;">Digital Resource Cloud</h4>
-                    <p style="margin: 0; font-size: 13px; color: #cbd5e1;">Instant access to ultimate toolkit libraries</p>
-                </div>
-            </div>
-
-            <div style="display: flex; margin-bottom: 20px; align-items: flex-start;">
-                <span style="background-color: #00b4d8; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-right: 12px; margin-top: 2px; flex-shrink: 0;">✓</span>
-                <div>
-                    <h4 style="margin: 0 0 4px 0; font-size: 16px; font-weight: bold;">Verified Certification</h4>
-                    <p style="margin: 0; font-size: 13px; color: #cbd5e1;">Enhance profile visibility and portfolios</p>
-                </div>
-            </div>
-
-            <div style="display: flex; margin-bottom: 20px; align-items: flex-start;">
-                <span style="background-color: #00b4d8; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-right: 12px; margin-top: 2px; flex-shrink: 0;">✓</span>
-                <div>
-                    <h4 style="margin: 0 0 4px 0; font-size: 16px; font-weight: bold;">Direct 1-on-1 Mentorship</h4>
-                    <p style="margin: 0; font-size: 13px; color: #cbd5e1;">Continuous professional steering</p>
-                </div>
-            </div>
-
-            <div style="display: flex; align-items: flex-start;">
-                <span style="background-color: #00b4d8; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-right: 12px; margin-top: 2px; flex-shrink: 0;">✓</span>
-                <div>
-                    <h4 style="margin: 0 0 4px 0; font-size: 16px; font-weight: bold;">Peer Growth Circle</h4>
-                    <p style="margin: 0; font-size: 13px; color: #cbd5e1;">Collaborate and climb alongside peers</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Bottom Action Area -->
-    <section style="text-align: center; padding: 20px; max-width: 500px; margin: 0 auto;">
-        <p style="font-size: 14px; font-weight: bold; color: #555555; margin-bottom: 15px;">⚡ Code <span style="color: #00b4d8;">030</span> guarantees an instant <span style="color: #00b4d8;">20% privilege rate</span>.<br>Limited cohorts available!</p>
-        
-        <!-- WhatsApp Enroll Button -->
-        <a href="https://wa.me/923000000000" style="background-color: #00b4d8; color: white; padding: 18px 35px; text-decoration: none; font-size: 18px; font-weight: bold; border-radius: 35px; display: inline-block; box-shadow: 0 6px 15px rgba(0,180,216,0.3); text-transform: uppercase;">
-            🚀 Secure My Seat at PKR 4,000
-        </a>
-        
-        <!-- Footer subtext details -->
-        <p style="font-size: 11px; color: #777777; margin-top: 20px; line-height: 1.6;">
-            Invited by: <span style="font-weight: bold; color: #1c2541;">Abida Shabi</span> • AS-Sa'adah Institute • Code: <span style="font-weight: bold; color: #1c2541;">030</span><br>
-            Published on: <span style="font-weight: bold; color: #1c2541;">10th June 2026</span> | Program Commencement: <span style="font-weight: bold; color: #1c2541;">15th June 2026</span>
-        </p>
-    </section>
-
-    <!-- Final Footer -->
-    <footer style="text-align: center; padding: 20px; font-size: 12px; color: #999999; margin-top: 20px; border-top: 1px solid #e2e8f0;">
-        © 2026 As-Sa'adah Institute. All Rights Reserved.
-    </footer>
-
+<script>
+  const toggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+</script>
 </body>
 </html>
