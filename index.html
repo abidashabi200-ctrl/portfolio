@@ -18,7 +18,7 @@
       --cream:   #F8F6F0;
       --muted:   #94A3B8;
       --card-bg: #151E2E;
-      --border:  rgba(201,168,76,0.18);
+      --border:  rgba(201,168,76,0.18 );
       --radius:  14px;
       --transition: 0.3s ease;
     }
@@ -326,70 +326,42 @@
       font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em;
       text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;
     }
-    .form-group input,
-    .form-group textarea,
-    .form-group select {
-      background: var(--navy-3);
-      border: 1px solid rgba(255,255,255,0.1);
+    .form-group input, .form-group select, .form-group textarea {
+      background: rgba(10,15,30,0.5);
+      border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 0.85rem 1rem;
-      color: var(--cream); font-family: 'Inter', sans-serif; font-size: 0.9rem;
-      outline: none; transition: border-color var(--transition), box-shadow var(--transition);
-      -webkit-appearance: none;
+      padding: 0.8rem 1rem;
+      color: var(--cream);
+      font-family: inherit; font-size: 0.9rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
     }
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
     }
-    .form-group input::placeholder,
-    .form-group textarea::placeholder { color: rgba(148,163,184,0.5); }
-    .form-group textarea { resize: vertical; min-height: 130px; }
-    .form-group select option { background: var(--navy-2); }
-
+    .form-group textarea { height: 120px; resize: none; }
     .form-submit {
-      width: 100%;
-      padding: 1rem;
-      background: linear-gradient(135deg, var(--gold), #B8902A);
-      color: var(--navy); font-family: 'Inter', sans-serif;
-      font-size: 0.95rem; font-weight: 700; letter-spacing: 0.05em;
-      border: none; border-radius: 8px; cursor: pointer;
+      width: 100%; padding: 1rem;
+      background: var(--gold); color: var(--navy);
+      border: none; border-radius: 8px;
+      font-size: 0.95rem; font-weight: 700; cursor: pointer;
       transition: all var(--transition);
+      margin-top: 0.5rem;
     }
-    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(201,168,76,0.35); }
+    .form-submit:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(201,168,76,0.25); }
 
-    footer {
-      background: var(--navy-2);
-      border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 2rem 5%;
-    }
-    .footer-inner {
-      display: flex; flex-direction: column; align-items: center; gap: 1rem;
-    }
-    .footer-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem; color: var(--gold);
-    }
-    .footer-links { display: flex; gap: 1.5rem; }
-    .footer-links a {
-      color: var(--muted); text-decoration: none; font-size: 0.82rem;
-      transition: color var(--transition);
-    }
+    footer { padding: 4rem 5% 3rem; background: var(--navy-2); border-top: 1px solid var(--border); }
+    .footer-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--gold); margin-bottom: 1.5rem; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color var(--transition); }
     .footer-links a:hover { color: var(--gold); }
-    .footer-copy { font-size: 0.78rem; color: rgba(148,163,184,0.5); }
+    .footer-copy { font-size: 0.75rem; color: rgba(148,163,184,0.6); letter-spacing: 0.02em; }
 
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; }
-      .hero-left { padding: 7rem 5% 3rem; }
-      .hero-right { height: 320px; }
-      .geo-wrap { width: 240px; height: 240px; }
-      .geo-ring:nth-child(1) { width: 220px; height: 220px; }
-      .geo-ring:nth-child(2) { width: 160px; height: 160px; }
-      .geo-ring:nth-child(3) { width: 100px; height: 100px; }
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .form-row { grid-template-columns: 1fr; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
     }
 
     @media (max-width: 640px) {
@@ -419,7 +391,8 @@
 <section id="home" class="hero">
   <div class="hero-left">
     <p class="hero-eyebrow">✦ Available for Collaboration</p>
-    <h1 class="hero-name">Abida<br><em>Shabi</em></h1>
+    <h1 class="hero-name">Abida  
+<em>Shabi</em></h1>
     <div class="hero-titles">
       <span class="title-tag">Web Designer</span>
       <span class="title-tag">Educator</span>
@@ -451,7 +424,8 @@
   <div class="about-grid">
     <div class="about-text">
       <p class="section-label">About Me</p>
-      <h2 class="section-title">Designer, Teacher,<br><span>Lifelong Learner</span></h2>
+      <h2 class="section-title">Designer, Teacher,  
+<span>Lifelong Learner</span></h2>
       <div class="section-divider"></div>
       <p>I'm <strong>Abida Shabi</strong>, founder of <strong>Fasiha Online Academy</strong> — where I run the <strong>Fahm-e-Quran</strong> program, teaching Quranic Arabic to women through a structured, word-by-word approach.</p>
       <p>Alongside my educational work, I build web experiences that are clean, accessible, and meaningful. I believe good design serves people — and I bring that same principle to every lesson I teach.</p>
@@ -553,7 +527,7 @@
           </div>
           <h3 class="project-name">Al-Qalam Platform</h3>
           <p class="project-desc">A full Islamic learning platform featuring Quran translation, tafseer, task tracking, Tasbeehat counters, and daily duas — built for Fasiha Online Academy students.</p>
-          <a href="#" class="project-link">View Project ↗</a>
+          <a href="https://github.com/abidashabi200-ctrl" target="_blank" class="project-link">View Project ↗</a>
         </div>
       </div>
 
@@ -567,7 +541,7 @@
           </div>
           <h3 class="project-name">Quran Flashcard Suite</h3>
           <p class="project-desc">Interactive word-by-word flashcard tools covering Surah Al-Fatiha and Al-Baqarah, with a gamified student roadmap featuring XP points and badges.</p>
-          <a href="#" class="project-link">View Project ↗</a>
+          <a href="https://github.com/abidashabi200-ctrl" target="_blank" class="project-link">View Project ↗</a>
         </div>
       </div>
 
@@ -581,7 +555,7 @@
           </div>
           <h3 class="project-name">Islamic Quiz Game</h3>
           <p class="project-desc">An engaging Islamic knowledge quiz application with multiple categories, score tracking, and instant feedback — deployed for student practice.</p>
-          <a href="#" class="project-link">View Project ↗</a>
+          <a href="https://github.com/abidashabi200-ctrl" target="_blank" class="project-link">View Project ↗</a>
         </div>
       </div>
 
@@ -596,24 +570,24 @@
     <div class="section-divider"></div>
     <p class="contact-intro">Whether you have a project in mind, want to collaborate on Islamic educational content, or simply want to say salam — my inbox is open.</p>
 
-    <div class="contact-form">
+    <form class="contact-form" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
       <div class="form-row">
         <div class="form-group">
           <label for="fname">First Name</label>
-          <input type="text" id="fname" placeholder="Your first name" />
+          <input type="text" id="fname" name="firstname" placeholder="Your first name" required />
         </div>
         <div class="form-group">
           <label for="lname">Last Name</label>
-          <input type="text" id="lname" placeholder="Your last name" />
+          <input type="text" id="lname" name="lastname" placeholder="Your last name" required />
         </div>
       </div>
       <div class="form-group">
         <label for="email">Email Address</label>
-        <input type="email" id="email" placeholder="you@example.com" />
+        <input type="email" id="email" name="email" placeholder="you@example.com" required />
       </div>
       <div class="form-group">
         <label for="subject">Subject</label>
-        <select id="subject">
+        <select id="subject" name="subject" required>
           <option value="">Select a topic…</option>
           <option>Web Design Project</option>
           <option>Educational Collaboration</option>
@@ -623,10 +597,10 @@
       </div>
       <div class="form-group">
         <label for="message">Message</label>
-        <textarea id="message" placeholder="Tell me about your project or inquiry…"></textarea>
+        <textarea id="message" name="message" placeholder="Tell me about your project or inquiry…" required></textarea>
       </div>
-      <button class="form-submit" type="button">Send Message →</button>
-    </div>
+      <button class="form-submit" type="submit">Send Message →</button>
+    </form>
   </div>
 </section>
 
@@ -644,10 +618,11 @@
 </footer>
 
 <script>
-  const toggle = document.getElementById('navToggle');
+  const toggle = document.getElementById('navToggle' );
   const navLinks = document.getElementById('navLinks');
   toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
   navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 </script>
 </body>
 </html>
+
